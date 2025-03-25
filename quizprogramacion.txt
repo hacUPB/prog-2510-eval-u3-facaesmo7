@@ -1,0 +1,17 @@
+Secreto = 15
+print("Bienvenido al juego 'Adivinar el número!'")
+print("Tienes que adivinar un número entre 1 y 100")
+#Todo lo que tenga que ver con intentos es nuevo ya que no lo puse en el quiz
+intentos = 0
+while True:
+#Cambie la forma del while y el orden del mismo
+    x = int(input("Ingresa tu intento: "))
+    intentos += 1
+    if x > Secreto:
+        print("El número es menor. Inténtalo de nuevo.")
+    elif x < Secreto:
+        print("El número es mayor. Inténtalo de nuevo.")
+    else:
+        print(f"¡Felicidades! Has adivinado el número en {intentos} intentos.")
+        break
+#Cambie el orden del break
