@@ -1,36 +1,45 @@
-print("Simulación de desintegración orbital de un satélite")
+print("Simulacion de desintegracion orbital de un satelite")
 
-# Obtener datos de entrada
-altitud_actual = float(input("Ingrese la altitud inicial del satélite (km): "))
-coeficiente_arrastre = float(input("Ingrese el coeficiente de arrastre inicial (ej. 0.01): "))
-altitud_minima = float(input("Ingrese la altitud mínima de seguridad (km): "))
+# Entrada de datos
+altitud_actual = input("Ingrese la altitud inicial del satelite (km): ")
+coeficiente_arrastre = input("Ingrese el coeficiente de arrastre inicial (ej. 0.01): ")
+altitud_minima = input("Ingrese la altitud minima de seguridad (km): ")
+
+# Conversión a float (sin try-except asumimos que el usuario lo hace bien)
+altitud_actual = float(altitud_actual)
+coeficiente_arrastre = float(coeficiente_arrastre)
+altitud_minima = float(altitud_minima)
 
 orbita = 0
 estabilizado = False
 
 print()
-print("Iniciando simulación...")
-print(f"Órbita {orbita}: Altitud = {altitud_actual:.2f} km")
+print("Iniciando simulacion...")
+print("Orbita " + str(orbita) + ": Altitud = " + str(round(altitud_actual, 2)) + " km")
 
 while True:
-    orbita += 1
+    orbita = orbita + 1
     altitud_perdida = coeficiente_arrastre * altitud_actual
-    altitud_actual -= altitud_perdida
-    coeficiente_arrastre += 0.0001
-    
-    print(f"Órbita {orbita}: Altitud = {altitud_actual:.2f} km, Pérdida = {altitud_perdida:.4f} km")
-    
+    altitud_actual = altitud_actual - altitud_perdida
+    coeficiente_arrastre = coeficiente_arrastre + 0.0001
+
+    print("Orbita " + str(orbita) + ": Altitud = " + str(round(altitud_actual, 2)) +
+          " km, Perdida = " + str(round(altitud_perdida, 4)) + " km")
+
     if altitud_actual <= altitud_minima:
         break
-    
+
     if altitud_perdida < 0.001:
         estabilizado = True
         break
 
+# Resultados
 print()
 print("Resultados")
 if estabilizado:
-    print(f"El satélite se ha estabilizado a {altitud_actual:.2f} km después de {orbita} órbitas.")
+    print("El satelite se ha estabilizado a " + str(round(altitud_actual, 2)) +
+          " km despues de " + str(orbita) + " orbitas.")
 else:
-    print(f"¡El satélite ha reingresado en la atmósfera después de {orbita} órbitas!")
-print(f"Altitud final: {altitud_actual:.2f} km")
+    print("¡El satelite ha reingresado en la atmosfera despues de " +
+          str(orbita) + " orbitas!")
+print("Altitud final: " + str(round(altitud_actual, 2)) + " km")
